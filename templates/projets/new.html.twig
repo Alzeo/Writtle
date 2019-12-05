@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Projets{% endblock %}
+
+{% block body %}
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head" style="margin-bottom:20px;">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_index') }}"><i class="fa fa-chevron-left"></i> Annuler la création</a>
+    <h2>Nouveau projet</h2>
+    </div>
+
+    {{ include('projets/_form.html.twig') }}
+
+</div>
+{% endblock %}

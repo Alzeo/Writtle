@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnages{% endblock %}
+
+{% block body %}
+    <h1>Personnages</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personnage.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ personnage.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ personnage.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ personnage.role }}</td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>{{ personnage.surname }}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>{{ personnage.genre }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ personnage.age }}</td>
+            </tr>
+            <tr>
+                <th>Residence</th>
+                <td>{{ personnage.residence }}</td>
+            </tr>
+            <tr>
+                <th>PlaceBorn</th>
+                <td>{{ personnage.placeBorn }}</td>
+            </tr>
+            <tr>
+                <th>Profession</th>
+                <td>{{ personnage.profession }}</td>
+            </tr>
+            <tr>
+                <th>Taille</th>
+                <td>{{ personnage.taille }}</td>
+            </tr>
+            <tr>
+                <th>Poids</th>
+                <td>{{ personnage.poids }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ personnage.description }}</td>
+            </tr>
+            <tr>
+                <th>Accessoires</th>
+                <td>{{ personnage.accessoires }}</td>
+            </tr>
+            <tr>
+                <th>Tenue</th>
+                <td>{{ personnage.tenue }}</td>
+            </tr>
+            <tr>
+                <th>Croyances</th>
+                <td>{{ personnage.croyances }}</td>
+            </tr>
+            <tr>
+                <th>Secrets</th>
+                <td>{{ personnage.secrets }}</td>
+            </tr>
+            <tr>
+                <th>TiqueParole</th>
+                <td>{{ personnage.tiqueParole }}</td>
+            </tr>
+            <tr>
+                <th>Education</th>
+                <td>{{ personnage.education }}</td>
+            </tr>
+            <tr>
+                <th>Richesse</th>
+                <td>{{ personnage.richesse }}</td>
+            </tr>
+            <tr>
+                <th>Qualites</th>
+                <td>{{ personnage.qualites }}</td>
+            </tr>
+            <tr>
+                <th>Defauts</th>
+                <td>{{ personnage.defauts }}</td>
+            </tr>
+            <tr>
+                <th>Addictions</th>
+                <td>{{ personnage.addictions }}</td>
+            </tr>
+            <tr>
+                <th>Weakness</th>
+                <td>{{ personnage.weakness }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('personnages_index') }}">back to list</a>
+
+    <a href="{{ path('personnages_edit', {'id': personnage.id}) }}">edit</a>
+
+    {{ include('personnages/_delete_form.html.twig') }}
+{% endblock %}

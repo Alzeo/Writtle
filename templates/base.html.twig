@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="img/favicon.png" rel="icon">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
+        <!--external css-->
+        <link rel="stylesheet" href="{{ asset('assets/lib/font-awesome/css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/zabuto_calendar.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}">
+
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/style-responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}">
+        <script src="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}"></script>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/00681fa20f.js"></script>
+    {% endblock %}
+    <style>
+        .nav-link {
+            color:#222 !important;
+            font-size:16px !important;
+            font-weight: 600 !important;
+            font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
+
+        nav {
+            padding-left: 30px !important;
+            padding-right: 30px !important;
+        }
+
+        .current {
+            border-bottom:3px solid #ffc107;
+        }
+
+        .tabmenu .nav-link:hover {
+            color: rgba(0, 0, 0, .7);
+            border-bottom: 3px solid #ffc107;
+            transition: 0.4s;
+        }
+
+        .tabmenu .nav-link {
+            transition: 0.4s;
+        }
+
+        .block-equipe {
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<header class="header black-bg">
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="index.html" class="logo"><b>PRI<span>SM</span></b></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+            <!-- settings start -->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <i class="fa fa-tasks"></i>
+                    <span class="badge bg-theme">4</span>
+                </a>
+                <ul class="dropdown-menu extended tasks-bar">
+                    <div class="notify-arrow notify-arrow-green"></div>
+                    <li>
+                        <p class="green">Tâche à réaliser</p>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <div class="task-info">
+                                <div class="desc">Création de projet</div>
+                                <div class="percent">0%</div>
+                            </div>
+                            <div class="progress progress-striped">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
+                                    <span class="sr-only">0% Complete (success)</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <div class="task-info">
+                                <div class="desc">Personnages</div>
+                                <div class="percent">0%</div>
+                            </div>
+                            <div class="progress progress-striped">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
+                                    <span class="sr-only">0% Complete (warning)</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <div class="task-info">
+                                <div class="desc">Personnages</div>
+                                <div class="percent">0%</div>
+                            </div>
+                            <div class="progress progress-striped">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
+                                    <span class="sr-only">0% Complete</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {#  <!-- settings end -->
+            <!-- inbox dropdown start-->
+            <li id="header_inbox_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-theme">5</span>
+                </a>
+                <ul class="dropdown-menu extended inbox">
+                    <div class="notify-arrow notify-arrow-green"></div>
+                    <li>
+                        <p class="green">You have 5 new messages</p>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <span class="photo"><img alt="avatar" src="{{ asset('assets/img/ui-zac.jpg') }}"></span>
+                            <span class="subject">
+                  <span class="from">Zac Snider</span>
+                  <span class="time">Just now</span>
+                  </span>
+                            <span class="message">
+                  Hi mate, how is everything?
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <span class="photo"><img alt="avatar" src="{{ asset('assets/img/ui-divya.jpg') }}"></span>
+                            <span class="subject">
+                  <span class="from">Divya Manian</span>
+                  <span class="time">40 mins.</span>
+                  </span>
+                            <span class="message">
+                  Hi, I need your help with this.
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <span class="photo"><img alt="avatar" src="img/ui-danro.jpg"></span>
+                            <span class="subject">
+                  <span class="from">Dan Rogers</span>
+                  <span class="time">2 hrs.</span>
+                  </span>
+                            <span class="message">
+                  Love your new Dashboard.
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">
+                            <span class="photo"><img alt="avatar" src="img/ui-sherman.jpg"></span>
+                            <span class="subject">
+                  <span class="from">Dj Sherman</span>
+                  <span class="time">4 hrs.</span>
+                  </span>
+                            <span class="message">
+                  Please, answer asap.
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#">See all messages</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- inbox dropdown end -->
+            #}
+
+            <!-- notification dropdown start-->
+            <li id="header_notification_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-warning">2</span>
+                </a>
+                <ul class="dropdown-menu extended notification">
+                    <div class="notify-arrow notify-arrow-yellow"></div>
+                    <li>
+                        <p class="yellow">2 notifications de Mr McBic</p>
+                    </li>
+
+
+                    {% if projets is not empty %}
+                        <li>
+                            <a href="index.html#">
+                                <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                Hey {{ user.username }} !
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                {{ random(["Il faut continuer ce projet !"]) }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="index.html#">
+                                <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                Hey {{ user.username }} !
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                                {{ random(["Tu n'as pas encore créer de projet !"]) }}
+                            </a>
+                        </li>
+                        {% endif %}
+                </ul>
+            </li>
+            <!-- notification dropdown end -->
+        </ul>
+        <!--  notification end -->
+    </div>
+</header>
+
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <p class="centered"><a href="profile.html"><img src="{{ asset('assets/img/ui-sam.jpg') }}" class="img-circle" width="80"></a></p>
+            <h5 class="centered">{{ user.username }}</h5>
+            <hr/>
+            <li class="mt">
+                <a class="{% if current_menu == 'dashboard' %} active {% else %} {% endif %}" href="{{ path('profil_show', {'id': user.id}) }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Tableau de bord</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a class="{% if current_menu == 'projet' %} active {% else %} {% endif %}" href="javascript:;">
+                    <i class="fa fa-book"></i>
+                    <span>Projets</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ path('projets_index') }}"><i class="fa fa-th-large"></i> Tous mes projets</a></li>
+                    <li><a href="buttons.html"><i class="fa fa-plus-circle"></i> Nouveau projet</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-user"></i>
+                    <span>Personnages</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="grids.html"><i class="fa fa-users"></i> Tous mes personnages</a></li>
+                    <li><a href="calendar.html"><i class="fa fa-plus-circle"></i> Nouveau personnage</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-list"></i>
+                    <span>Chapitres</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="blank.html"><i class="fa fa-th-large"></i> Tous mes chapitres</a></li>
+                    <li><a href="login.html"><i class="fa fa-plus-circle"></i> Nouveau chapitre</a></li>
+                </ul>
+            </li>
+            <hr/>
+            <li class="mt">
+                <a href="{{ path('app_logout') }}">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Se déconnecter</span>
+                </a>
+            </li>
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+{% block body %}
+
+{% endblock %}
+        </div>
+    </section>
+</section>
+
+
+<script src="{{ asset('assets/lib/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+<script class="include" type="text/javascript" src="{{ asset('assets/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
+<script src="{{ asset('assets/lib/jquery.scrollTo.min.js') }}"></script>
+<script src="{{ asset('assets/lib/jquery.nicescroll.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/lib/jquery.sparkline.js') }}"></script>
+<!--common script for all pages-->
+<script src="{{ asset('assets/lib/common-scripts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/lib/gritter/js/jquery.gritter.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/lib/gritter-conf.js') }}"></script>
+<!--script for this page-->
+<script src="{{ asset('assets/lib/sparkline-chart.js') }}"></script>
+<script src="{{ asset('assets/lib/zabuto_calendar.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var unique_id = $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: 'Welcome to Dashio!',
+            // (string | mandatory) the text inside the notification
+            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+            // (string | optional) the image to display on the left
+            image: 'img/ui-sam.jpg',
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: false,
+            // (int | optional) the time you want it to be alive for before fading out
+            time: 8000,
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'my-sticky-class'
+        });
+
+        return false;
+    });
+</script>
+<script type="application/javascript">
+    $(document).ready(function() {
+        $("#date-popover").popover({
+            html: true,
+            trigger: "manual"
+        });
+        $("#date-popover").hide();
+        $("#date-popover").click(function(e) {
+            $(this).hide();
+        });
+
+        $("#my-calendar").zabuto_calendar({
+            action: function() {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function() {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [{
+                type: "text",
+                label: "Special event",
+                badge: "00"
+            },
+                {
+                    type: "block",
+                    label: "Regular event",
+                }
+            ]
+        });
+    });
+
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
+{% block javascripts %}
+
+{% endblock %}
+</body>
+</html>

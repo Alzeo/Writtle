@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Highconcept index{% endblock %}
+
+{% block body %}
+    <h1>Highconcept index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Protagoniste</th>
+                <th>Antagoniste</th>
+                <th>Contexte</th>
+                <th>EventStart</th>
+                <th>Stake</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for highconcept in highconcepts %}
+            <tr>
+                <td>{{ highconcept.id }}</td>
+                <td>{{ highconcept.protagoniste }}</td>
+                <td>{{ highconcept.antagoniste }}</td>
+                <td>{{ highconcept.contexte }}</td>
+                <td>{{ highconcept.eventStart }}</td>
+                <td>{{ highconcept.stake }}</td>
+                <td>
+                    <a href="{{ path('highconcept_show', {'id': highconcept.id}) }}">show</a>
+                    <a href="{{ path('highconcept_edit', {'id': highconcept.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('highconcept_new') }}">Create new</a>
+{% endblock %}

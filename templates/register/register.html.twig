@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Inscription</h1>
+    </div>
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <button class="btn btn-primary">{{ button_label|default("S'inscrire") }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

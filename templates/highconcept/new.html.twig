@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Highconcept{% endblock %}
+
+{% block body %}
+    <h1>Create new Highconcept</h1>
+
+    {{ include('highconcept/_form.html.twig') }}
+
+    <a href="{{ path('highconcept_index') }}">back to list</a>
+{% endblock %}

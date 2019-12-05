@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets index{% endblock %}
+
+{% block body %}
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head">
+        <h2>Tous vos projets</h2>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Créé le</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td>{{ projet.name }}</td>
+                <td>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('projets_show', {'id': projet.id}) }}"><i class="fa fa-eye"></i> Voir</a>
+                    <a class="btn btn-primary" href="{{ path('projets_edit', {'id': projet.id}) }}"><i class="fa fa-cog"></i> Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('projets_new') }}">Commencer un nouveau projet</a>
+{% endblock %}

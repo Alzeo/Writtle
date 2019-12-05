@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+
+{% block body %}
+    {#
+    <div class="main-chart" style="padding:50px;">
+        <div class="book">
+            <div class="border-head">
+                <h2>{{ projet.name }}</h2>
+            </div>
+            <a href="{{ path('projets_index') }}">back to list</a>
+
+            <a href="{{ path('projets_edit', {'id': projet.id}) }}">edit</a>
+
+            {{ include('projets/_delete_form.html.twig') }}
+        </div>
+    </div>
+    #}
+
+    <div class="jumbotron mt-4" style="background-image: url({{ asset ('/assets/img/198.jpg') }}); background-size: cover ">
+        <div class="container mb-4" style="background:#fff; padding: 20px;">
+            <h1 style="text-transform: uppercase;">{{ projets.name }} <em style="font-size:13px; text-transform: initial">Créé le : {{ projets.createdAt|date('d/m/Y') }}</em><a style="float: right; color:#fff;" href="{{ path('projets_edit', {'id': projets.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr/>
+            <h5>Résumé :</h5>
+            <p>{{ projets.resume }}</p>
+        </div>
+        <div class="container">
+            <div class="actions row" style="display: inline-block">
+                <a href="{{ path('projets_index') }}" class="btn btn-info" style="margin-bottom:20px; margin-top:20px;">Retourner à mes projets</a>
+
+                {{ include('projets/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+<div class="mt">
+    <!-- SERVER STATUS PANELS -->
+    <div class="col-md-4 col-sm-4 mb">
+        <div class="green-panel pn donut-chart">
+            <div class="green-header">
+                <h5>High concept</h5>
+            </div>
+            {% if HC is not empty %}
+                <div class="panel terques-chart">
+                    <div class="panel-body">
+                        <div class="chart">
+                            <br>
+                            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[3,135,667,333,526,996,564,123,890,564,455]"></div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+            <a href="{{ path('highconcept_new', {'idProjet': projet.id}) }}">Démarrer le high Concept</a>
+            {% endif %}
+
+        </div>
+        <!-- /grey-panel -->
+    </div>
+    <div class="col-md-4 col-sm-4 mb">
+        <div class="white-panel pn donut-chart">
+            <div class="white-header">
+                <h5>Personnages {% if personnages is not empty %} <span class="badge bg-theme">{{ totalPersonnages }}</span> {% else %} {% endif %}</h5>
+            </div>
+            {% if personnages is not empty %}
+                <div class="table-pad" style="padding: 20px;">
+                    <table class="table table-b stordered mt-4" style="padding:20px;">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Rôle</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background:#fff">
+                        {% for personnage in personnages %}
+                            <tr>
+                                <td>{{ personnage.firstName }}</td>
+                                <td>{{ personnage.lastName }}</td>
+                                <td>{{ personnage.role }}</td>
+                                <td>
+                                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
+                                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Aucun personnage</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a class="btn btn-success" href="{{ path('personnages_new', {'idProjet': projets.id}) }}">Nouveau personnage</a>
+                </div>
+
+            {% else %}
+               <p> Il n'y aucun personnage dans ton histoire ?</p>
+                <a class="btn btn-success" href="{{ path('personnages_new', {'idProjet': projets.id}) }}">Nouveau personnage</a>
+            {% endif %}
+        </div>
+    </div>
+        <div class="col-md-4 col-sm-4 mb">
+            <div class="white-panel pn donut-chart">
+                <div class="white-header">
+                    <h5>Chapitres {% if chapitres is not empty %} <span class="badge bg-theme">{{ totalChapitres }}</span> {% else %} {% endif %}</h5>
+                </div>
+                {% if chapitres is not empty %}
+                    <div class="table-pad" style="padding: 20px;">
+                        <table class="table table-b stordered mt-4" style="padding:20px;">
+                            <thead class="thead-light">
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Rôle</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody style="background:#fff">
+                            {% for personnage in personnages %}
+                                <tr>
+                                    <td>{{ personnage.firstName }}</td>
+                                    <td>{{ personnage.lastName }}</td>
+                                    <td>{{ personnage.role }}</td>
+                                    <td>
+                                        <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
+                                        <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">Aucun personnage</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <a class="btn btn-success" href="{{ path('chapitre_new', {'idProjet': projets.id}) }}">Nouveau chapitre</a>
+                    </div>
+
+                {% else %}
+                    <p> Il n'y aucun chapitre dans ton histoire ?</p>
+                    <a class="btn btn-success" href="{{ path('chapitre_new', {'idProjet': projets.id}) }}">Nouveau nouveau chapitre</a>
+                {% endif %}
+            </div>
+        </div>
+</div>
+{% endblock %}

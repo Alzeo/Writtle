@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Highconcept{% endblock %}
+
+{% block body %}
+    <h1>Highconcept</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ highconcept.id }}</td>
+            </tr>
+            <tr>
+                <th>Protagoniste</th>
+                <td>{{ highconcept.protagoniste }}</td>
+            </tr>
+            <tr>
+                <th>Antagoniste</th>
+                <td>{{ highconcept.antagoniste }}</td>
+            </tr>
+            <tr>
+                <th>Contexte</th>
+                <td>{{ highconcept.contexte }}</td>
+            </tr>
+            <tr>
+                <th>EventStart</th>
+                <td>{{ highconcept.eventStart }}</td>
+            </tr>
+            <tr>
+                <th>Stake</th>
+                <td>{{ highconcept.stake }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('highconcept_index') }}">back to list</a>
+
+    <a href="{{ path('highconcept_edit', {'id': highconcept.id}) }}">edit</a>
+
+    {{ include('highconcept/_delete_form.html.twig') }}
+{% endblock %}

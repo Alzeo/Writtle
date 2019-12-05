@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Highconcept{% endblock %}
+
+{% block body %}
+    <h1>Edit Highconcept</h1>
+
+    {{ include('highconcept/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('highconcept_index') }}">back to list</a>
+
+    {{ include('highconcept/_delete_form.html.twig') }}
+{% endblock %}
