@@ -5,14 +5,14 @@
 {% block body %}
 <div class="main-chart" style="padding:50px;">
     <div class="border-head">
-        <h2>Tous vos projets</h2>
+        <h2>Tous vos projets  |  <a class="btn btn-success " href="{{ path('projets_new') }}"> Nouveau projet</a></h2>
     </div>
     <div class="row mt">
         {% for projet in projets %}
         <div class="col-md-4 col-sm-4 mb">
             <div class="white-panel pn donut-chart">
                 <div class="white-header">
-                    <h4><a href="{{ path('projets_show', {'id': projet.id}) }}"> {{ projet.name }}</a></h4>
+                    <h3><a href="{{ path('projets_show', {'id': projet.id}) }}"> {{ projet.name }}</a></h3>
                 </div>
                 <p>Créé le : <i>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</i></p>
 
@@ -27,6 +27,6 @@
 
     </div>
 </div>
-    <a class="btn btn-success" href="{{ path('projets_new') }}">Commencer un nouveau projet</a>
+
 
 {% endblock %}

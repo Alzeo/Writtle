@@ -31,6 +31,7 @@ class HighconceptController extends AbstractController
      */
     public function new(Request $request, Projets $projets): Response
     {
+        $idProjet = $projets->getId();
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -54,13 +55,15 @@ class HighconceptController extends AbstractController
             $entityManager->persist($highconcept);
             $entityManager->flush();
 
-            return $this->redirectToRoute('projet_show');
+            return $this->redirectToRoute('projets_show', [
+            'id' => $idProjet,]);
         }
 
         return $this->render('highconcept/new.html.twig', [
             'highconcept' => $highconcept,
             'form' => $form->createView(),
             'projets' => $Allprojets,
+            'idProjet' => $idProjet,
             'user' => $user,
             'current_menu' => 'projet'
         ]);

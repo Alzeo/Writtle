@@ -318,7 +318,7 @@
                         </ul>
                 {% else %}
                     <p>Commencer par créer un projet</p>
-                <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">
+                    <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
                 {% endfor %}
             </div>
 
@@ -397,6 +397,36 @@
 
 <!-- fin modal tous les chapitres -->
 
+
+<div class="modal fade" id="nouveauChapitre" tabindex="-1" role="dialog" aria-labelledby="nouveauChapitreTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="nouveauChapitreTitle">Quel projet est concerné ? <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h5>
+
+            </div>
+            <div class="modal-body">
+                {% for projet in projets %}
+                    <ul>
+                        <li>
+                            <a href="{{ path('chapitre_new', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <p>Commencer par créer un projet</p>
+                    <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
+                {% endfor %}
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="{{ asset('assets/lib/jquery/jquery.min.js') }}"></script>

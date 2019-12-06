@@ -35,6 +35,7 @@ class Personnages
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projets", inversedBy="personnages")
+     * @ORM\JoinColumn(name="projet_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $projet;
 
@@ -140,6 +141,7 @@ class Personnages
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Chapitre", mappedBy="personnages")
+     * @ORM\JoinColumn(name="projet_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $chapitres;
 

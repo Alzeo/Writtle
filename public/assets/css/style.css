@@ -929,7 +929,8 @@ PANELS CONFIGURATIONS
 /*Panel Size*/
 
 .pn {
-	height: 250px;
+    padding-bottom: 20px;
+    min-height: 320px ;
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -3502,3 +3503,8 @@ ul.chat-available-user li a:hover {
 ul.sidebar-menu li a.active {
     color:#fff !important;
 }
+
+.white-header .btn-success {
+    margin-top: -8px !important;
+}
+

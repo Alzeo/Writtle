@@ -53,6 +53,7 @@ class PersonnagesController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
+
         $personnage = new Personnages();
         $personnage->setProjet($projets);
         $form = $this->createForm(PersonnagesType::class, $personnage);

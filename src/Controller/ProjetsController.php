@@ -20,26 +20,30 @@ class ProjetsController extends AbstractController
 {
     /**
      * @Route("/projets", name="projets_index", methods={"GET"})
+     * @param ProjetsRepository $projetsRepository
+     * @param Projets $projets
+     * @return Response
      */
     public function index(ProjetsRepository $projetsRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
-
-        $projets = $this->getDoctrine()
+        $allProjet = $this->getDoctrine()
             ->getRepository(Projets::class)
             ->findBy(
                 ['user' => $user ]
             );
-        $totalProjet = count($projets);
-        dump($totalProjet);
+
+        $totalProjet = count($allProjet);
+
+
 
         return $this->render('projets/index.html.twig', [
-            'projets' => $projets,
+            'projets' => $allProjet,
             'current_menu' => 'projet',
             'user' => $user,
-            'totalProjet' => $totalProjet
+            'totalProjet' => $totalProjet,
         ]);
     }
 
@@ -50,7 +54,6 @@ class ProjetsController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-
 
         $projets = $this->getDoctrine()
             ->getRepository(Projets::class)
@@ -131,6 +134,9 @@ class ProjetsController extends AbstractController
      */
     public function edit(Request $request, Projets $projet): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+
         $form = $this->createForm(ProjetsType::class, $projet);
         $form->handleRequest($request);
 
@@ -141,8 +147,11 @@ class ProjetsController extends AbstractController
         }
 
         return $this->render('projets/edit.html.twig', [
-            'projet' => $projet,
+            'projets' => $projet,
             'form' => $form->createView(),
+            'user' => $user,
+            'current_menu' => 'projets'
+
         ]);
     }
 

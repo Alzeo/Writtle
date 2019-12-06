@@ -41,11 +41,13 @@ class Projets
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Personnages", mappedBy="projet")
+
      */
     private $personnages;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="projet")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="projet", cascade={"remove"})
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $chapitres;
 
