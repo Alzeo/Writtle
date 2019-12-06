@@ -17,18 +17,29 @@ class PersonnagesController extends AbstractController
 {
     /**
      * @Route("projets/{idProjet}/personnages/", name="personnages_index", methods={"GET"})
+     * @Entity("projet", expr="repository.find(idProjet)")
+     * @param PersonnagesRepository $personnagesRepositoryn
+     * @param Projets $projets
+     * @return Response
      */
-    public function index(PersonnagesRepository $personnagesRepository, Projets $projets): Response
+    public function index(PersonnagesRepository $personnagesRepository, Projets $projet): Response
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
+        $allProjets = $this->getDoctrine()
+            ->getRepository(Projets::class)
+            ->findBy(
+                ['user' => $user ]
+            );
+
 
         return $this->render('personnages/index.html.twig', [
             'personnages' => $personnagesRepository->findAll(),
             'user' => $user,
-            'projets' => $projets,
+            'projet' => $projet,
+            'projets' => $allProjets,
             'current_menu' => 'personnages'
         ]);
     }

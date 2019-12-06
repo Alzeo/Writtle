@@ -28,7 +28,7 @@ class ChapitreType extends AbstractType
                     'placeholder' => 1
                 ]
             ])
-            ->add('date', TextType::class, [
+            ->add('dateContexte', TextType::class, [
                 'label' => 'Période ou se déroule le chapitre',
                 'required' => false,
                 'attr' => [

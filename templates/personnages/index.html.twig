@@ -64,8 +64,8 @@
                 <td>{{ personnage.weakness }}</td>
                 <td>
 
-                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet' : projets.id }) }}">show</a>
-                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet' : projets.id }) }}">edit</a>
+                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet' : projet.id }) }}">show</a>
+                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet' : projet.id }) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -76,5 +76,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('personnages_new') }}">Create new</a>
+    <a href="{{ path('personnages_new', {'idProjet' : projet.id }) }}">Create new</a>
 {% endblock %}

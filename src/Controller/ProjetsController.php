@@ -51,6 +51,7 @@ class ProjetsController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
+
         $projets = $this->getDoctrine()
             ->getRepository(Projets::class)
             ->findBy(
@@ -75,6 +76,8 @@ class ProjetsController extends AbstractController
             'projets' => $projets,
             'current_menu' => 'projet',
             'user' => $user,
+            'totalChapitres' => $totalChapitres,
+            'totalPersonnages' => $totalPersonnages
         ]);
     }
 

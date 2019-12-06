@@ -23,10 +23,6 @@ class Chapitre
      */
     private $number;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -63,6 +59,11 @@ class Chapitre
      */
     private $personnages;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dateContexte;
+
     public function __construct()
     {
         $this->personnages = new ArrayCollection();
@@ -81,18 +82,6 @@ class Chapitre
     public function setNumber(?int $number): self
     {
         $this->number = $number;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(?\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -192,6 +181,18 @@ class Chapitre
         if ($this->personnages->contains($personnage)) {
             $this->personnages->removeElement($personnage);
         }
+
+        return $this;
+    }
+
+    public function getDateContexte(): ?string
+    {
+        return $this->dateContexte;
+    }
+
+    public function setDateContexte(?string $dateContexte): self
+    {
+        $this->dateContexte = $dateContexte;
 
         return $this;
     }

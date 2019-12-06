@@ -259,23 +259,23 @@
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a class="{% if current_menu == 'personnages' %} active {% else %} {% endif %}" href="javascript:;">
                     <i class="fa fa-user"></i>
                     <span>Personnages</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="grids.html"><i class="fa fa-users"></i> Tous mes personnages</a></li>
-                    <li><a href="calendar.html"><i class="fa fa-plus-circle"></i> Nouveau personnage</a></li>
+                    <li><a data-toggle="modal" data-target="#tousLesPersonnages"><i class="fa fa-users"></i> Tous mes personnages</a></li>
+                    <li><a data-toggle="modal" data-target="#nouveauPersonnage"><i class="fa fa-plus-circle"></i> Nouveau personnage</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a class="{% if current_menu == 'chapitres' %} active {% else %} {% endif %}" href="javascript:;">
                     <i class="fa fa-list"></i>
                     <span>Chapitres</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="blank.html"><i class="fa fa-th-large"></i> Tous mes chapitres</a></li>
-                    <li><a href="login.html"><i class="fa fa-plus-circle"></i> Nouveau chapitre</a></li>
+                    <li><a data-toggle="modal" data-target="#tousLesChapitres"><i class="fa fa-th-large"></i> Tous mes chapitres</a></li>
+                    <li><a data-toggle="modal" data-target="#nouveauChapitre"><i class="fa fa-plus-circle"></i> Nouveau chapitre</a></li>
                 </ul>
             </li>
             <hr/>
@@ -298,6 +298,105 @@
         </div>
     </section>
 </section>
+
+<!-- Modal tous les personnages -->
+<div class="modal fade" id="tousLesPersonnages" tabindex="-1" role="dialog" aria-labelledby="tousLesPersonnagesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="tousLesPersonnagesTitle">Quel projet est concerné ? <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h5>
+
+            </div>
+            <div class="modal-body">
+                {% for projet in projets %}
+                        <ul>
+                            <li>
+                               <a href="{{ path('personnages_index', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
+                            </li>
+                        </ul>
+                {% else %}
+                    <p>Commencer par créer un projet</p>
+                <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">
+                {% endfor %}
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fin modal tous les personnages -->
+
+<!-- Modal nouveau personnages -->
+
+<div class="modal fade" id="nouveauPersonnage" tabindex="-1" role="dialog" aria-labelledby="nouveauPersonnageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="nouveauPersonnageTitle">Quel projet est concerné ? <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h5>
+
+            </div>
+            <div class="modal-body">
+                {% for projet in projets %}
+                <ul>
+                    <li>
+                        <a href="{{ path('personnages_new', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
+                    </li>
+                </ul>
+                {% else %}
+                <p>Commencer par créer un projet</p>
+                    <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
+                    {% endfor %}
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- fin modal tous les chapitres -->
+
+<div class="modal fade" id="tousLesChapitres" tabindex="-1" role="dialog" aria-labelledby="tousLesChapitresTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="tousLeschapitresTitle">Quel projet est concerné ? <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h5>
+
+            </div>
+            <div class="modal-body">
+                {% for projet in projets %}
+                <ul>
+                    <li>
+                        <a href="{{ path('personnages_new', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
+                    </li>
+                </ul>
+                {% else %}
+                <p>Commencer par créer un projet</p>
+                    <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
+                    {% endfor %}
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- fin modal tous les chapitres -->
+
 
 
 <script src="{{ asset('assets/lib/jquery/jquery.min.js') }}"></script>

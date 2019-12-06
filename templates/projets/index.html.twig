@@ -7,32 +7,26 @@
     <div class="border-head">
         <h2>Tous vos projets</h2>
     </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Créé le</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row mt">
         {% for projet in projets %}
-            <tr>
-                <td>{{ projet.name }}</td>
-                <td>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</td>
-                <td>
-                    <a class="btn btn-info" href="{{ path('projets_show', {'id': projet.id}) }}"><i class="fa fa-eye"></i> Voir</a>
-                    <a class="btn btn-primary" href="{{ path('projets_edit', {'id': projet.id}) }}"><i class="fa fa-cog"></i> Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="col-md-4 col-sm-4 mb">
+            <div class="white-panel pn donut-chart">
+                <div class="white-header">
+                    <h4><a href="{{ path('projets_show', {'id': projet.id}) }}"> {{ projet.name }}</a></h4>
+                </div>
+                <p>Créé le : <i>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</i></p>
 
+                {{ projet.resume }}
+                <a class="btn btn-info" href="{{ path('projets_show', {'id': projet.id}) }}"><i class="fa fa-eye"></i> Voir</a>
+                <a class="btn btn-primary" href="{{ path('projets_edit', {'id': projet.id}) }}"><i class="fa fa-cog"></i> Modifier</a>
+            </div>
+        </div>
+            {% else %}
+                no records found
+            {% endfor %}
+
+    </div>
+</div>
     <a class="btn btn-success" href="{{ path('projets_new') }}">Commencer un nouveau projet</a>
+
 {% endblock %}
