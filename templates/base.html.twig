@@ -23,6 +23,7 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/00681fa20f.js"></script>
+        <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     {% endblock %}
     <style>
         .nav-link {
@@ -198,8 +199,6 @@
                     <li>
                         <p class="yellow">2 notifications de Mr McBic</p>
                     </li>
-
-
                     {% if projets is not empty %}
                         <li>
                             <a href="index.html#">
@@ -239,7 +238,7 @@
     <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a href="profile.html"><img src="{{ asset('assets/img/ui-sam.jpg') }}" class="img-circle" width="80"></a></p>
+            <p class="centered"><a href="profile.html"><img src="{{ asset('assets/img/ui-girl.png') }}" width="80"></a></p>
             <h5 class="centered">{{ user.username }}</h5>
             <hr/>
             <li class="mt">
@@ -255,7 +254,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{ path('projets_index') }}"><i class="fa fa-th-large"></i> Tous mes projets</a></li>
-                    <li><a href="buttons.html"><i class="fa fa-plus-circle"></i> Nouveau projet</a></li>
+                    <li><a href="{{ path('projets_new') }}"><i class="fa fa-plus-circle"></i> Nouveau projet</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -317,7 +316,10 @@
                             </li>
                         </ul>
                 {% else %}
-                    <p>Commencer par créer un projet</p>
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 200px">
+                        <h4 style="margin-bottom: 20px">Tu n'as pour le moment aucun projet</h4>
+                    </div>
                     <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
                 {% endfor %}
             </div>
@@ -350,7 +352,10 @@
                     </li>
                 </ul>
                 {% else %}
-                <p>Commencer par créer un projet</p>
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 200px">
+                        <h4 style="margin-bottom: 20px">Tu n'as pour le moment aucun projet</h4>
+                    </div>
                     <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
                     {% endfor %}
             </div>
@@ -378,11 +383,14 @@
                 {% for projet in projets %}
                 <ul>
                     <li>
-                        <a href="{{ path('personnages_new', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
+                        <a href="{{ path('chapitre_index', {'idProjet': projet.id}) }}" class="btn btn-info btn-lg btn-block"> {{ projet.name }}</a>
                     </li>
                 </ul>
                 {% else %}
-                <p>Commencer par créer un projet</p>
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 200px">
+                        <h4 style="margin-bottom: 20px">Tu n'as pour le moment aucun projet</h4>
+                    </div>
                     <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
                     {% endfor %}
             </div>
@@ -415,6 +423,10 @@
                         </li>
                     </ul>
                 {% else %}
+                    <div class="text-center">
+                        <img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 200px">
+                        <h4 style="margin-bottom: 20px">Tu n'as pour le moment aucun projet</h4>
+                    </div>
                     <p>Commencer par créer un projet</p>
                     <a href="{{ path('projets_new') }}" class="btn btn-success btn-lg btn-block">Démarrer un nouveau projet</a>
                 {% endfor %}
@@ -442,6 +454,7 @@
 <!--script for this page-->
 <script src="{{ asset('assets/lib/sparkline-chart.js') }}"></script>
 <script src="{{ asset('assets/lib/zabuto_calendar.js') }}"></script>
+<!--
 <script type="text/javascript">
     $(document).ready(function() {
         var unique_id = $.gritter.add({
@@ -462,6 +475,7 @@
         return false;
     });
 </script>
+-->
 <script type="application/javascript">
     $(document).ready(function() {
         $("#date-popover").popover({
@@ -504,6 +518,16 @@
         console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
 </script>
+<script>
+    CKEDITOR.replace( 'projets[resume]' );
+    CKEDITOR.replace( 'chapitre[resume]' );
+</script>
+<script>
+$(document).ready(function() {
+$('select').select2();
+});
+</script>
+</body>
 {% block javascripts %}
 
 {% endblock %}

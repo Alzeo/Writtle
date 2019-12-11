@@ -1,46 +1,42 @@
 
-
+{#
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputUsername">Username</label>
+        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
 
-    #}
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
+<div class="checkbox mb-3">
+    <label>
+        <input type="checkbox" name="_remember_me"> Remember me
+    </label>
+</div>
 <button class="btn btn-lg btn-primary" type="submit">
     Sign in
 </button>
 </form>
 
 {% endblock %}
+#}
 
-{#
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,17 +56,9 @@
     <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
     <!--external css-->
     <link rel="stylesheet" href="{{ asset('assets/lib/font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/zabuto_calendar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}">
-
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style-responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}">
-    <script src="{{ asset('assets/lib/gritter/css/jquery.gritter.css') }}"></script>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/00681fa20f.js"></script>
 
     <!-- =======================================================
       Template Name: Dashio
@@ -80,38 +68,47 @@
     ======================================================= -->
 </head>
 
-<body>
+<body style="background: url({{ asset ('/assets/img/login-bgg.jpg') }}) no-repeat center center fixed;">
 <!-- **********************************************************************************************************************************************************
     MAIN CONTENT
     *********************************************************************************************************************************************************** -->
 <div id="login-page">
     <div class="container">
-        <form class="form-login" action="index.html">
+        <form class="form-login" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
             <h2 class="form-login-heading">Se connecter</h2>
             <div class="login-wrap">
                 <input type="text" value="{{ last_username }}" name="username" placeholder="Username" id="inputUsername" class="form-control" required autofocus>
                 <br>
-                <input type="password" name="password" id="inputPassword" placeholder="Mot de passe" class="form-control" required>
-
+                <input type="password" name="password" id="inputPassword" placeholder="********" class="form-control" required>
+                <label class="checkbox" style="margin-left:20px;">
+                    <input type="checkbox" value="_remember_me"> Se souvenir de moi
+                    <span class="pull-right">
+            <a data-toggle="modal" href="login.html#myModal"> Mot de passe oublié ?</a>
+            </span>
+                </label>
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
                 >
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> se souvenir de moi
-                    </label>
-                </div>
-                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> CONNEXION</button>
+                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> Connexion</button>
                 <hr>
                 <div class="registration">
-                    Vous n'avez pas de compte ?<br/>
-                    <a class="" href="#">
-                        Créer un compte
+                    Pas encore de compte ?<br/>
+                    <a class="" href="" disabled>
+                        Créez en un
                     </a>
                 </div>
             </div>
+            <!-- modal -->
         </form>
-    </div>
 </div>
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="lib/jquery/jquery.min.js"></script>
@@ -120,13 +117,15 @@
 <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
 <script type="text/javascript" src="lib/jquery.backstretch.min.js"></script>
 <script>
-    $.backstretch("img/login-bg.jpg", {
+    $.backstretch("{{ asset('assets/img/login-bgg.jpg') }}", {
         speed: 500
     });
 </script>
+
 </body>
 
-</html>#}
+</html>
+
 
 
 

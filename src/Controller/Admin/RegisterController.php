@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegisterController extends AbstractController {
 
     /**
-     * @Route("/inscription", name="register")
+     * @Route("/register", name="register")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder){
@@ -29,7 +29,7 @@ class RegisterController extends AbstractController {
             $entityManager->persist($register);
             $entityManager->flush();
 
-            return $this->redirectToRoute('dashboard', [
+            return $this->redirectToRoute('app_login', [
             ]);
         }
         return $this->render('register/register.html.twig', [

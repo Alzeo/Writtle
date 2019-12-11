@@ -3,40 +3,52 @@
 {% block title %}Highconcept{% endblock %}
 
 {% block body %}
-    <h1>Highconcept</h1>
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_index') }}"><i class="fa fa-chevron-left"></i> revenir au projet</a>
+    <h3 style="margin-bottom:30px; margin-top:40px;">HighConcept de : {{ projet.name }}</h3>
+    </div>
+    <div class="section-block" style="padding:30px;">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+                    <p style="font-size:20px; text-align: center"> {{ highconcept.protagoniste }}</p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+                    <p style="font-size:20px; text-align: center; font-weight: bold"> VS </p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+                    <p style="font-size:20px; text-align: center"> {{ highconcept.antagoniste }}</p>
+                </div>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ highconcept.id }}</td>
-            </tr>
-            <tr>
-                <th>Protagoniste</th>
-                <td>{{ highconcept.protagoniste }}</td>
-            </tr>
-            <tr>
-                <th>Antagoniste</th>
-                <td>{{ highconcept.antagoniste }}</td>
-            </tr>
-            <tr>
-                <th>Contexte</th>
-                <td>{{ highconcept.contexte }}</td>
-            </tr>
-            <tr>
-                <th>EventStart</th>
-                <td>{{ highconcept.eventStart }}</td>
-            </tr>
-            <tr>
-                <th>Stake</th>
-                <td>{{ highconcept.stake }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('highconcept_index') }}">back to list</a>
-
-    <a href="{{ path('highconcept_edit', {'id': highconcept.id}) }}">edit</a>
+        </div>
+            <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+            <h4 style="color:#5bbfde">l'histoire se déroule :</h4>
+        <p style="font-size:16px;">
+            {{ highconcept.contexte }}
+        </p>
+        </div>
+            <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+                 <h4 style="color:#5bbfde">jusqu'au moment déclencheur</h4>
+                 <p style="font-size:16px;">
+                    {{  highconcept.eventStart }}
+                </p>
+            </div>
+        <div class="step" style="padding:40px; margin-bottom:20px; background:#fff; ">
+            <h4 style="color:#5bbfde">Les enjeux</h4>
+            <p style="font-size:16px;">
+                {{ highconcept.stake }}
+            </p>
+        </div>
+    </div>
+    <a class="btn btn-primary" style="margin-bottom:20px;" href="{{ path('highconcept_edit', {'id': highconcept.id, 'idProjet': projet.id}) }}">Modifier</a>
 
     {{ include('highconcept/_delete_form.html.twig') }}
+</div>
+
 {% endblock %}

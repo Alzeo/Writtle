@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Highconcept;
 use App\Entity\Projets;
@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class HighconceptController extends AbstractController
 {
     /**
-     * @Route("/highconcept", name="highconcept_index", methods={"GET"})
+     * @Route("admin/highconcept", name="highconcept_index", methods={"GET"})
      */
     public function index(HighconceptRepository $highconceptRepository): Response
     {
@@ -26,7 +26,7 @@ class HighconceptController extends AbstractController
     }
 
     /**
-     * @Route("projets/{idProjet}/highconcept/new", name="highconcept_new", methods={"GET","POST"})
+     * @Route("admin/projets/{idProjet}/highconcept/new", name="highconcept_new", methods={"GET","POST"})
      * @Entity("projets", expr="repository.find(idProjet)")
      */
     public function new(Request $request, Projets $projets): Response
@@ -70,46 +70,100 @@ class HighconceptController extends AbstractController
     }
 
     /**
-     * @Route("projets/{idProjet}/highconcept/{id}", name="highconcept_show", methods={"GET"})
+     * @Route("admin/projets/{idProjet}/highconcept/{id}", name="highconcept_show", methods={"GET"})
+     * @Entity("projets", expr="repository.find(idProjet)")
      */
-    public function show(Highconcept $highconcept): Response
+    public function show(Highconcept $highconcept, Projets $projets): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+
+        $projetsByUser = $this->getDoctrine()
+            ->getRepository(Projets::class)
+            ->findBy(
+                ['user' => $user ]
+            );
+
         return $this->render('highconcept/show.html.twig', [
             'highconcept' => $highconcept,
+            'projet' => $projets,
+            'projets' => $projetsByUser,
+            'user' => $user,
+            'current_menu' => ''
         ]);
     }
 
     /**
-     * @Route("projets/{idProjet}/highconcept/{id}/edit", name="highconcept_edit", methods={"GET","POST"})
+     * @Route("admin/projets/{idProjet}/highconcept/{id}/edit", name="highconcept_edit", methods={"GET","POST"})
+     * @Entity("projets", expr="repository.find(idProjet)")
      */
-    public function edit(Request $request, Highconcept $highconcept): Response
+    public function edit(Request $request, Highconcept $highconcept, Projets $projets): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $idProjet = $projets->getId();
+
+        $projetsByUser = $this->getDoctrine()
+            ->getRepository(Projets::class)
+            ->findBy(
+                ['user' => $user ]
+            );
+
+
         $form = $this->createForm(HighconceptType::class, $highconcept);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('highconcept_index');
+            return $this->redirectToRoute('highconcept_show', [
+                'idProjet' => $idProjet,
+                'id' => $highconcept->getId(),
+                'projet' => $projets,
+                'projets' => $projetsByUser,
+                'user' => $user,
+                'current_menu' => 'projets'
+            ]);
         }
 
         return $this->render('highconcept/edit.html.twig', [
             'highconcept' => $highconcept,
             'form' => $form->createView(),
+            'projet' => $projets,
+            'projets' => $projetsByUser,
+            'user' => $user,
+            'current_menu' => 'projets'
         ]);
     }
 
     /**
-     * @Route("projets/{idProjet}/highconcept/{id}", name="highconcept_delete", methods={"DELETE"})
+     * @Route("admin/projets/{idProjet}/highconcept/{id}", name="highconcept_delete", methods={"DELETE"})
+     * @Entity("projets", expr="repository.find(idProjet)")
      */
-    public function delete(Request $request, Highconcept $highconcept): Response
+    public function delete(Request $request, Highconcept $highconcept, Projets $projets): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $idProjet = $projets->getId();
+
+        $projetsByUser = $this->getDoctrine()
+            ->getRepository(Projets::class)
+            ->findBy(
+                ['user' => $user ]
+            );
+
         if ($this->isCsrfTokenValid('delete'.$highconcept->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($highconcept);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('highconcept_index');
+        return $this->redirectToRoute('projets_show', [
+            'id' => $idProjet,
+            'projet' => $projets,
+            'projets' => $projetsByUser,
+            'user' => $user,
+            'current_menu' => 'projets'
+        ]);
     }
 }

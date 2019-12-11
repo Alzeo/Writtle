@@ -18,12 +18,12 @@
     </div>
     #}
 
-    <div class="jumbotron mt-4" style="background-image: url({{ asset ('/assets/img/198.jpg') }}); background-size: cover ">
+    <div class="jumbotron mt-4" style="background-image: url({{ asset ('/assets/img/2268152.jpg') }}); background-size: cover ">
         <div class="container mb-4" style="background:#fff; padding: 20px;">
-            <h1 style="text-transform: uppercase;">{{ projets.name }} <em style="font-size:13px; text-transform: initial">Créé le : {{ projets.createdAt|date('d/m/Y') }}</em><a style="float: right; color:#fff;" href="{{ path('projets_edit', {'id': projets.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a></h1>
+            <h1 style="text-transform: uppercase;">{{ projet.name }} <em style="font-size:13px; text-transform: initial">Créé le : {{ projet.createdAt|date('d/m/Y') }}</em><a style="float: right; color:#fff;" href="{{ path('projets_edit', {'id': projet.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a></h1>
             <hr/>
             <h5>Résumé :</h5>
-            <p>{{ projets.resume }}</p>
+            <p>{{ projet.resume|raw|striptags|slice(0, 600) ~ '...' }} <a data-toggle="modal" data-target="#resume"> Voir la totalité</a> </p>
         </div>
         <div class="container">
             <div class="actions row" style="display: inline-block">
@@ -37,18 +37,19 @@
 <div class="mt">
     <!-- SERVER STATUS PANELS -->
     <div class="col-md-4 col-sm-4 mb">
-        <div class="green-panel pn donut-chart">
-            <div class="green-header">
+        <div class="white-panel pn donut-chart">
+            <div class="white-header">
                 <h5>High concept</h5>
             </div>
             {% if HC is not empty %}
                 {% for HC in HC %}
-                    {{ HC.protagoniste }}
-                <a href="{{ path('highconcept_show', {'id': HC.id, 'idProjet': projets.id,}) }}">Voir le highconcept</a>
+                    <img src="{{ asset('assets/img/79-with-flag copie.png') }}" style="width: 150px" class="mt">
+                <a class="btn btn-info" href="{{ path('highconcept_show', {'id': HC.id, 'idProjet': projet.id,}) }}">Besoin de voir le highconcept ?</a>
                 {% else %}
                     {% endfor %}
             {% else %}
-            <a href="{{ path('highconcept_new', {'idProjet': projets.id}) }}">Démarrer le high Concept</a>
+                <img src="{{ asset('assets/img/60-being-happy-and-showing-a-notepad copie.png') }}" style="width: 150px" class="mt">
+            <a class="btn btn-success" href="{{ path('highconcept_new', {'idProjet': projet.id}) }}">Démarrer le high Concept</a>
             {% endif %}
 
         </div>
@@ -59,8 +60,8 @@
             <div class="white-header">
                 <h5>Personnages {% if personnages is not empty %} <span class="badge bg-theme">{{ totalPersonnages }}</span> {% else %} {% endif %}</h5>
             </div>
-            <a class="btn btn-info" href="{{ path('personnages_index', {'idProjet': projets.id}) }}">Tous les personnages</a>
-            <a class="btn btn-success" href="{{ path('personnages_new', {'idProjet': projets.id}) }}">Nouveau personnage</a>
+            <a class="btn btn-info" href="{{ path('personnages_index', {'idProjet': projet.id}) }}">Tous les personnages</a>
+            <a class="btn btn-success" href="{{ path('personnages_new', {'idProjet': projet.id}) }}">Nouveau personnage</a>
             {% if personnages is not empty %}
                 <div class="table-pad" style="padding: 20px;">
                     <table class="table table-b stordered mt-4" style="padding:20px;">
@@ -79,8 +80,8 @@
                                 <td>{{ personnage.lastName }}</td>
                                 <td>{{ personnage.role }}</td>
                                 <td>
-                                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
-                                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet': projets.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
+                                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet': projet.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
+                                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet': projet.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
                                 </td>
                             </tr>
                         {% else %}
@@ -102,8 +103,8 @@
                 <div class="white-header">
                     <h5>Chapitres {% if chapitres is not empty %} <span class="badge bg-theme">{{ totalChapitres }}</span> {% else %} {% endif %}</h5>
                 </div>
-                <a class="btn btn-info" href="{{ path('chapitre_index', {'idProjet': projets.id}) }}"> Tous les chapitres</a>
-                <a class="btn btn-success" href="{{ path('chapitre_new', {'idProjet': projets.id}) }}"> Nouveau chapitre</a>
+                <a class="btn btn-info" href="{{ path('chapitre_index', {'idProjet': projet.id}) }}"> Tous les chapitres</a>
+                <a class="btn btn-success" href="{{ path('chapitre_new', {'idProjet': projet.id}) }}"> Nouveau chapitre</a>
                 {% if chapitres is not empty %}
                     <div class="table-pad" style="padding: 20px;">
                         <table class="table table-b stordered mt-4" style="padding:20px;">
@@ -120,8 +121,8 @@
                                     <td>{{ chapitre.number }}</td>
                                     <td>{{ chapitre.title }}</td>
                                     <td>
-                                        <a href="{{ path('chapitre_show', {'id': chapitre.id, 'idProjet': projets.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
-                                        <a href="{{ path('chapitre_edit', {'id': chapitre.id, 'idProjet': projets.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
+                                        <a href="{{ path('chapitre_show', {'id': chapitre.id, 'idProjet': projet.id}) }}" class="btn btn-primary" style="font-size:14px;">Voir</a>
+                                        <a href="{{ path('chapitre_edit', {'id': chapitre.id, 'idProjet': projet.id}) }}" class="btn btn-outline-primary" style="font-size:14px;">Editer</a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -138,5 +139,24 @@
                 {% endif %}
             </div>
         </div>
+    <div class="modal fade" id="resume" tabindex="-1" role="dialog" aria-labelledby="resumeContenu" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="resumeContenu">Résumé<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></h5>
+
+                </div>
+                <div class="modal-body">
+                   <p>{{ projet.resume|raw }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}

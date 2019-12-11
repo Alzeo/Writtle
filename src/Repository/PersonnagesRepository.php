@@ -29,6 +29,15 @@ class PersonnagesRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByChapitre($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->Where('p.chapitres = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Personnages[] Returns an array of Personnages objects
     //  */

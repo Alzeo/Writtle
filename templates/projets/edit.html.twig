@@ -3,11 +3,16 @@
 {% block title %}Edit Projets{% endblock %}
 
 {% block body %}
-    <h1>Edit Projets</h1>
-
-    {{ include('projets/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('projets_index') }}">back to list</a>
-
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head" style="margin:auto; width: 70%;">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_index') }}"><i class="fa fa-chevron-left"></i> Annuler les modifications</a>
+    <h2 style="margin-bottom:30px;">Modifier le projet</h2>
+    </div>
+<div class="formulaire" style="margin:auto; width: 70%">
+    <p>{{ include('projets/_form.html.twig', {'button_label': 'Sauvegarder'}) }}</p>
+</div>
+    <div class="deleting" style="margin:auto; width: 70%; padding-top:20px; ">
     {{ include('projets/_delete_form.html.twig') }}
+        </div>
+</div>
 {% endblock %}

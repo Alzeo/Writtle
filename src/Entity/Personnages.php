@@ -141,7 +141,7 @@ class Personnages
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Chapitre", mappedBy="personnages")
-     * @ORM\JoinColumn(name="projet_id", referencedColumnName="id", onDelete="CASCADE")
+
      */
     private $chapitres;
 

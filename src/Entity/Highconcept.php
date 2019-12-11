@@ -42,7 +42,7 @@ class Highconcept
     private $stake;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Projets", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Projets")
      */
     private $projet;
 

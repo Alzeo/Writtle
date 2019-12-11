@@ -14,15 +14,18 @@
                 <div class="white-header">
                     <h3><a href="{{ path('projets_show', {'id': projet.id}) }}"> {{ projet.name }}</a></h3>
                 </div>
-                <p>Créé le : <i>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</i></p>
+                <span style="font-style: italic;">Créé le : <i>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</i></span>
 
-                {{ projet.resume }}
+                <p class="text-justify">{{ projet.resume|striptags|slice(0, 500) ~ '...' }}</p>
                 <a class="btn btn-info" href="{{ path('projets_show', {'id': projet.id}) }}"><i class="fa fa-eye"></i> Voir</a>
                 <a class="btn btn-primary" href="{{ path('projets_edit', {'id': projet.id}) }}"><i class="fa fa-cog"></i> Modifier</a>
             </div>
         </div>
             {% else %}
-                no records found
+                <div class="text-center">
+                        <img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 400px">
+                        <h2>Tu n'as pour le moment aucun projet</h2>
+                </div>
             {% endfor %}
 
     </div>

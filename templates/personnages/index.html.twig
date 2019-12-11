@@ -3,78 +3,52 @@
 {% block title %}Personnages index{% endblock %}
 
 {% block body %}
-    <h1>Personnages index</h1>
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_index') }}"><i class="fa fa-chevron-left"></i> revenir au projet</a>
+        <h2 style="margin-bottom:30px;">Personnages présent dans : {{ projet.name }}</h2>
+    </div>
 
-    <table class="table">
-        <thead>
+    <div class="formulaire">
+        <a style="margin-bottom:20px;" class="btn btn-success" href="{{ path('personnages_new', {'idProjet' : projet.id }) }}">Ajouter un personnage</a>
+
+        <table class="table">
+            <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Role</th>
-                <th>Surname</th>
-                <th>Genre</th>
-                <th>Age</th>
-                <th>Residence</th>
-                <th>PlaceBorn</th>
-                <th>Profession</th>
-                <th>Taille</th>
-                <th>Poids</th>
-                <th>Description</th>
-                <th>Accessoires</th>
-                <th>Tenue</th>
-                <th>Croyances</th>
-                <th>Secrets</th>
-                <th>TiqueParole</th>
-                <th>Education</th>
-                <th>Richesse</th>
-                <th>Qualites</th>
-                <th>Defauts</th>
-                <th>Addictions</th>
-                <th>Weakness</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for personnage in personnages %}
-            <tr>
-                <td>{{ personnage.id }}</td>
-                <td>{{ personnage.firstName }}</td>
-                <td>{{ personnage.lastName }}</td>
-                <td>{{ personnage.role }}</td>
-                <td>{{ personnage.surname }}</td>
-                <td>{{ personnage.genre }}</td>
-                <td>{{ personnage.age }}</td>
-                <td>{{ personnage.residence }}</td>
-                <td>{{ personnage.placeBorn }}</td>
-                <td>{{ personnage.profession }}</td>
-                <td>{{ personnage.taille }}</td>
-                <td>{{ personnage.poids }}</td>
-                <td>{{ personnage.description }}</td>
-                <td>{{ personnage.accessoires }}</td>
-                <td>{{ personnage.tenue }}</td>
-                <td>{{ personnage.croyances }}</td>
-                <td>{{ personnage.secrets }}</td>
-                <td>{{ personnage.tiqueParole }}</td>
-                <td>{{ personnage.education }}</td>
-                <td>{{ personnage.richesse }}</td>
-                <td>{{ personnage.qualites }}</td>
-                <td>{{ personnage.defauts }}</td>
-                <td>{{ personnage.addictions }}</td>
-                <td>{{ personnage.weakness }}</td>
-                <td>
+            </thead>
+            <tbody>
+            {% for personnage in personnages %}
+                <tr>
+                    <td>{{ personnage.firstName }}</td>
+                    <td>{{ personnage.lastName }}</td>
+                    <td>{{ personnage.role }}</td>
+                    <td>
 
-                    <a href="{{ path('personnages_show', {'id': personnage.id, 'idProjet' : projet.id }) }}">show</a>
-                    <a href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet' : projet.id }) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="25">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <a class="btn btn-info" href="{{ path('personnages_show', {'id': personnage.id, 'idProjet' : projet.id }) }}"><i class="fa fa-eye"></i> Voir sa fiche</a>
+                        <a class="btn btn-primary" href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet' : projet.id }) }}"><i class="fa fa-cog"></i> Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="25">
+                        <div class="text-center">
+                            <p><img src="{{ asset('assets/img/68-searching-with-magnifying-glass copie.png') }}" style="width: 130px">
+                                Tu n'as pour le moment aucun personnages</p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('personnages_new', {'idProjet' : projet.id }) }}">Create new</a>
+    </div>
+
+</div>
+
+
 {% endblock %}

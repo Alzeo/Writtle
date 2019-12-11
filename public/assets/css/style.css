@@ -3508,3 +3508,61 @@ ul.sidebar-menu li a.active {
     margin-top: -8px !important;
 }
 
+.formulaire {
+    background: #fafafa;
+    padding: 30px;
+}
+
+.donut-chart p {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.jumbotron p {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+textarea.form-control {
+    min-height: 200px;
+}
+
+.modal-body p {
+    font-size: 16px;
+    text-align: justify;
+    padding-left: 30px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+#projet_resume {overflow:scroll; max-height:300px}
+
+span#cke_21 {
+    display: none;
+}
+span#cke_25 {
+    display: none;
+}
+span#cke_30 {
+    display: none;
+}
+span#cke_11 {
+    display: none;
+}
+
+span#cke_19 {
+    display: none;
+}
+span#cke_32 {
+    display: none;
+}
+.badge {
+padding: 7px 10px;
+
+}
+span.badge.badge-primary {
+    background: #337ab7;
+}

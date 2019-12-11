@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Chapitre;
 use App\Entity\Highconcept;
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjetsController extends AbstractController
 {
     /**
-     * @Route("/projets", name="projets_index", methods={"GET"})
+     * @Route("admin/projets", name="projets_index", methods={"GET"})
      * @param ProjetsRepository $projetsRepository
      * @param Projets $projets
      * @return Response
@@ -29,18 +29,16 @@ class ProjetsController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
-        $allProjet = $this->getDoctrine()
+        $projetsByUser = $this->getDoctrine()
             ->getRepository(Projets::class)
             ->findBy(
                 ['user' => $user ]
             );
 
-        $totalProjet = count($allProjet);
-
-
+        $totalProjet = count($projetsByUser);
 
         return $this->render('projets/index.html.twig', [
-            'projets' => $allProjet,
+            'projets' => $projetsByUser,
             'current_menu' => 'projet',
             'user' => $user,
             'totalProjet' => $totalProjet,
@@ -48,7 +46,7 @@ class ProjetsController extends AbstractController
     }
 
     /**
-     * @Route("projets/new", name="projets_new", methods={"GET","POST"})
+     * @Route("admin/projets/new", name="projets_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -79,22 +77,20 @@ class ProjetsController extends AbstractController
             'projets' => $projets,
             'current_menu' => 'projet',
             'user' => $user,
-            'totalChapitres' => $totalChapitres,
-            'totalPersonnages' => $totalPersonnages
         ]);
     }
 
     /**
-     * @Route("projets/{id}", name="projets_show", methods={"GET"})
+     * @Route("admin/projets/{id}", name="projets_show", methods={"GET"})
      */
-    public function show(Projets $projets, HighconceptRepository $highconceptRepository): Response
+    public function show(Projets $projet, HighconceptRepository $highconceptRepository): Response
     {
 
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
-        $allProjets = $this->getDoctrine()
+        $projetsByUser = $this->getDoctrine()
             ->getRepository(Projets::class)
             ->findBy(
                 ['user' => $user ]
@@ -102,15 +98,15 @@ class ProjetsController extends AbstractController
 
         $highconcept = $this->getDoctrine()
             ->getRepository(Highconcept::class)
-            ->findAllHq($projets->getId());
+            ->findAllHq($projet->getId());
 
         $personnages = $this->getDoctrine()
             ->getRepository(Personnages::class)
-            ->findByProjet($projets->getId());
+            ->findByProjet($projet->getId());
 
         $chapitres = $this->getDoctrine()->getManager()
             ->getRepository(Chapitre::class)
-            ->findByProjet($projets->getId());
+            ->findByProjet($projet->getId());
 
         $totalChapitres = count($chapitres);
 
@@ -118,8 +114,8 @@ class ProjetsController extends AbstractController
 
         return $this->render('projets/show.html.twig', [
             'totalPersonnages' => $totalPersonnages,
-            'projets' => $projets,
-            'AllProjets' => $allProjets,
+            'projet' => $projet,
+            'projets' => $projetsByUser,
             'current_menu' => 'projet',
             'user' => $user,
             'HC' => $highconcept,
@@ -130,12 +126,20 @@ class ProjetsController extends AbstractController
     }
 
     /**
-     * @Route("projets/{id}/edit", name="projets_edit", methods={"GET","POST"})
+     * @Route("admin/projets/{id}/edit", name="projets_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Projets $projet): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+
+        $allProjet = $this->getDoctrine()
+            ->getRepository(Projets::class)
+            ->findBy(
+                ['user' => $user ]
+            );
+
+        $totalProjet = count($allProjet);
 
         $form = $this->createForm(ProjetsType::class, $projet);
         $form->handleRequest($request);
@@ -147,16 +151,17 @@ class ProjetsController extends AbstractController
         }
 
         return $this->render('projets/edit.html.twig', [
-            'projets' => $projet,
+            'projets' => $allProjet,
             'form' => $form->createView(),
             'user' => $user,
-            'current_menu' => 'projets'
+            'current_menu' => 'projets',
+            'projet' => $projet
 
         ]);
     }
 
     /**
-     * @Route("projets/{id}", name="projets_delete", methods={"DELETE"})
+     * @Route("admin/projets/{id}", name="projets_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Projets $projet): Response
     {

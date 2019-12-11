@@ -3,11 +3,15 @@
 {% block title %}Edit Highconcept{% endblock %}
 
 {% block body %}
-    <h1>Edit Highconcept</h1>
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head" style="margin:auto; width: 70%">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_show',  {'id' : projet.id }) }}"><i class="fa fa-chevron-left"></i> Annuler la modification</a>
+        <h2 style="margin-bottom:30px;">Editer le highconcept</h2>
+    </div>
+    <div class="formulaire" style="margin:auto; width: 70%">
 
-    {{ include('highconcept/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('highconcept_index') }}">back to list</a>
-
+    {{ include('highconcept/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
     {{ include('highconcept/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

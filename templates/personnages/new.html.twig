@@ -3,9 +3,19 @@
 {% block title %}New Personnages{% endblock %}
 
 {% block body %}
-    <h1>Create new Personnages</h1>
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head" style="margin:auto; width: 70%">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('projets_index') }}"><i class="fa fa-chevron-left"></i> Annuler la création</a>
+    <h2 style="margin-bottom:30px;">Création d'un personnage</h2>
+    </div>
+        <div class="formulaire" style="margin:auto; width: 70%">
+            {{ include('personnages/_form.html.twig') }}
+        </div>
+</div>
+{% endblock %}
 
-    {{ include('personnages/_form.html.twig') }}
-
-    <a href="{{ path('personnages_index', {'id': personnage.id, 'idProjet' : projets.id }) }}">back to list</a>
+{% block javascripts %}
+<script type="javascript">
+    $('.collapse').collapse()
+</script>
 {% endblock %}

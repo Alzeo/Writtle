@@ -35,19 +35,17 @@ class Projets
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projets")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Personnages", mappedBy="projet")
+     * @ORM\OneToMany(targetEntity="App\Entity\Personnages", mappedBy="projet", orphanRemoval=true)
 
      */
     private $personnages;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="projet", cascade={"remove"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="projet", orphanRemoval=true)
      */
     private $chapitres;
 

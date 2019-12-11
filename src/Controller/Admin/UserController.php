@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Projets;
 use App\Entity\User;
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil", name="profil_index", methods={"GET"})
+     * @Route("admin/profil", name="profil_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository, UserInterface $user): Response
     {
@@ -41,7 +41,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("profil/{id}", name="profil_show", methods={"GET"})
+     * @Route("admin/profil/{id}", name="profil_show", methods={"GET"})
      */
     public function show(UserInterface $user, ProjetsRepository $projetsRepository): Response
     {
@@ -67,7 +67,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("profil/{id}/edit", name="profil_edit", methods={"GET","POST"})
+     * @Route("admin/profil/{id}/edit", name="profil_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
@@ -87,7 +87,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("profil/{id}", name="profil_delete", methods={"DELETE"})
+     * @Route("admin/profil/{id}", name="profil_delete", methods={"DELETE"})
      */
     public function delete(Request $request, User $user): Response
     {

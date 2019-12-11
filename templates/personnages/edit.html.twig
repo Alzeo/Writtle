@@ -3,11 +3,16 @@
 {% block title %}Edit Personnages{% endblock %}
 
 {% block body %}
-    <h1>Edit Personnages</h1>
+<div class="main-chart" style="padding:50px;">
+    <div class="border-head" style="margin:auto; width: 70%">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('personnages_index',  {'idProjet' : projet.id }) }}"><i class="fa fa-chevron-left"></i> Annuler la création</a>
+        <h2 style="margin-bottom:30px;">Editer personnage</h2>
+    </div>
 
-    {{ include('personnages/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('personnages_index') }}">back to list</a>
+    <div class="formulaire" style="margin:auto; width: 70%">
+    {{ include('personnages/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
 
     {{ include('personnages/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

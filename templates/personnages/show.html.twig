@@ -3,112 +3,73 @@
 {% block title %}Personnages{% endblock %}
 
 {% block body %}
-    <h1>Personnages</h1>
+    <div class="border-head" style="margin:auto; width: 70%">
+        <a style="margin-top:20px;" class="btn btn-info" href="{{ path('personnages_index', {'idProjet': projet.id}) }}"><i class="fa fa-chevron-left"></i>Revenir aux personnages</a>
+        <h2 style="margin-bottom:30px;">Fiche de : {{ personnage.firstName }} {{ personnage.lastName }} <span class="badge badge-primary">{{ personnage.role }}</span></h2>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ personnage.id }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ personnage.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ personnage.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Role</th>
-                <td>{{ personnage.role }}</td>
-            </tr>
-            <tr>
-                <th>Surname</th>
-                <td>{{ personnage.surname }}</td>
-            </tr>
-            <tr>
-                <th>Genre</th>
-                <td>{{ personnage.genre }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ personnage.age }}</td>
-            </tr>
-            <tr>
-                <th>Residence</th>
-                <td>{{ personnage.residence }}</td>
-            </tr>
-            <tr>
-                <th>PlaceBorn</th>
-                <td>{{ personnage.placeBorn }}</td>
-            </tr>
-            <tr>
-                <th>Profession</th>
-                <td>{{ personnage.profession }}</td>
-            </tr>
-            <tr>
-                <th>Taille</th>
-                <td>{{ personnage.taille }}</td>
-            </tr>
-            <tr>
-                <th>Poids</th>
-                <td>{{ personnage.poids }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ personnage.description }}</td>
-            </tr>
-            <tr>
-                <th>Accessoires</th>
-                <td>{{ personnage.accessoires }}</td>
-            </tr>
-            <tr>
-                <th>Tenue</th>
-                <td>{{ personnage.tenue }}</td>
-            </tr>
-            <tr>
-                <th>Croyances</th>
-                <td>{{ personnage.croyances }}</td>
-            </tr>
-            <tr>
-                <th>Secrets</th>
-                <td>{{ personnage.secrets }}</td>
-            </tr>
-            <tr>
-                <th>TiqueParole</th>
-                <td>{{ personnage.tiqueParole }}</td>
-            </tr>
-            <tr>
-                <th>Education</th>
-                <td>{{ personnage.education }}</td>
-            </tr>
-            <tr>
-                <th>Richesse</th>
-                <td>{{ personnage.richesse }}</td>
-            </tr>
-            <tr>
-                <th>Qualites</th>
-                <td>{{ personnage.qualites }}</td>
-            </tr>
-            <tr>
-                <th>Defauts</th>
-                <td>{{ personnage.defauts }}</td>
-            </tr>
-            <tr>
-                <th>Addictions</th>
-                <td>{{ personnage.addictions }}</td>
-            </tr>
-            <tr>
-                <th>Weakness</th>
-                <td>{{ personnage.weakness }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="formulaire container" style="margin:auto; width: 70%">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="container">
 
-    <a href="{{ path('personnages_index') }}">back to list</a>
+                        <p><b>Âge :</b> {{ personnage.age }} ans</p>
+                        <p><b>Genre :</b> {{ personnage.genre }}</p>
+                        <p><b>Taille :</b> {{ personnage.taille }} cm</p>
+                        <p><b>Poids :</b> {{ personnage.poids }}</p>
+                </div>
+            </div>
+        </div>
+       <div class="col-sm-6">
+            <div class="row">
+                <div class="container">
+                    <p><b>Surnom :</b> {{ personnage.surname }}</p>
+                        <p><b>Ville de naissance :</b> {{ personnage.placeBorn }}</p>
+                        <p><b>Lieu de résidence :</b> {{ personnage.residence }}</p>
+                        <p><b>profession  :</b> {{ personnage.profession }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt">
+            <div class="container formulaire" style="margin:auto; width: 70%">
+                <h3>Description du personnage</h3>
+                <p>{{ personnage.description }}</p>
+            </div>
+        </div>
 
-    <a href="{{ path('personnages_edit', {'id': personnage.id}) }}">edit</a>
+        <div class="mt">
+            <div class="formulaire container" style="margin:auto; width: 70%">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="container">
 
-    {{ include('personnages/_delete_form.html.twig') }}
+                            <p><b>Accessoires :</b> {{ personnage.accessoires }}</p>
+                            <p><b>Style vestimentaire :</b> {{ personnage.tenue }}</p>
+                            <p><b>Taille :</b> {{ personnage.tiqueParole }}</p>
+                            <p><b>Poids :</b> {{ personnage.croyances }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="container">
+                            <p><b>Surnom :</b> {{ personnage.qualites }}</p>
+                            <p><b>Ville de naissance :</b> {{ personnage.defauts }}</p>
+                            <p><b>Lieu de résidence :</b> {{ personnage.addictions }}</p>
+                            <p><b>profession  :</b> {{ personnage.weakness }}</p>
+                            <p><b>profession  :</b> {{ personnage.education }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin:auto; width: 70%">
+
+                <a class="btn btn-primary" style="margin-top:20px;" href="{{ path('personnages_edit', {'id': personnage.id, 'idProjet': projet.id}) }}">Modifier</a>
+
+                {{ include('personnages/_delete_form.html.twig') }}
+            </div>
+    </div>
+</div>
 {% endblock %}
