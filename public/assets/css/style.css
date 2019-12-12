@@ -3559,10 +3559,10 @@ span#cke_19 {
 span#cke_32 {
     display: none;
 }
-.badge {
+h2 .badge {
 padding: 7px 10px;
-
 }
+
 span.badge.badge-primary {
     background: #337ab7;
 }
