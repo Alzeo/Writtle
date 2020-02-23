@@ -16,7 +16,7 @@
                 </div>
                 <span style="font-style: italic;">Créé le : <i>{{ projet.createdAt ? projet.createdAt|date('d-m-Y') : '' }}</i></span>
 
-                <p class="text-justify">{{ projet.resume|striptags|slice(0, 500) ~ '...' }}</p>
+                <p class="text-justify">{{ projet.resume|truncate(355, true)|raw}}</p>
                 <a class="btn btn-info" href="{{ path('projets_show', {'id': projet.id}) }}"><i class="fa fa-eye"></i> Voir</a>
                 <a class="btn btn-primary" href="{{ path('projets_edit', {'id': projet.id}) }}"><i class="fa fa-cog"></i> Modifier</a>
             </div>

@@ -102,11 +102,11 @@ class PersonnagesType extends AbstractType
                 'required' => false
             ])
             ->add('qualites', TextType::class, [
-                'label' => 'Qualité (séparé par une virgule)',
+                'label' => 'Qualités (séparés par une virgule)',
                 'required' => false
             ])
             ->add('defauts', TextType::class, [
-                'label' => 'Défauts (séparé par une virgule)',
+                'label' => 'Défauts (séparés par une virgule)',
                 'required' => false
             ])
             ->add('addictions', TextType::class, [

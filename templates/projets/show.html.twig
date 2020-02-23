@@ -23,7 +23,7 @@
             <h1 style="text-transform: uppercase;">{{ projet.name }} <em style="font-size:13px; text-transform: initial">Créé le : {{ projet.createdAt|date('d/m/Y') }}</em><a style="float: right; color:#fff;" href="{{ path('projets_edit', {'id': projet.id}) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a></h1>
             <hr/>
             <h5>Résumé :</h5>
-            <p>{{ projet.resume|raw|striptags|slice(0, 600) ~ '...' }} <a data-toggle="modal" data-target="#resume"> Voir la totalité</a> </p>
+            <p>{{ projet.resume|truncate(355, true)|raw}} <a data-toggle="modal" data-target="#resume"> Voir la totalité</a> </p>
         </div>
         <div class="container">
             <div class="actions row" style="display: inline-block">

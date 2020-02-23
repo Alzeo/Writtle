@@ -128,7 +128,7 @@ class ProjetsController extends AbstractController
     /**
      * @Route("admin/projets/{id}/edit", name="projets_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Projets $projet): Response
+    public function edit(Request $request, Projets $projet, $id): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -147,7 +147,9 @@ class ProjetsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('projets_index');
+            return $this->redirectToRoute('projets_show', [
+                'id' => $id
+            ]);
         }
 
         return $this->render('projets/edit.html.twig', [
